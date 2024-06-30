@@ -2,7 +2,7 @@
   "name": "todo-list-tutorial-two",
   "version": "1.0.0",
   "description": "Simple! Complete the to do list",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "dev": "webpack --mode=development",
     "build": "webpack --mode=production",
