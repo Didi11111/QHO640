@@ -8,20 +8,26 @@ import Todo from "./todo";
 import todos from "./todolist";
 
 
+
 function render(todolist) {
     console.log('ready');
     document.getElementById('app').innerHTML = view;
 
-    const tds = [...todos];
+    //const tds = [...todos];  - error1 
+    //vs 
+    const tds = [...todolist]; 
 
     const handleCloseClick = (e) => {
         render(tds.filter((item) => e.target.id.substr(5) != item.id));
     };
 
+
     document.querySelector(".list").innerHTML = tds.map((item) => Todo(item.text, item.id)).join(" ");
 
-    document.querySelectorAll(".close").forEach((e) => addEventListener("click", handleCloseClick));
 
+   // document.querySelectorAll(".close").forEach((e) => addEventListener("click", handleCloseClick)); - error2 
+   //vs 
+    document.querySelectorAll(".close").forEach((e) => e.addEventListener("click", handleCloseClick));
     const form = document.getElementById('todoForm');
     const input = document.getElementById('todoInput');
 
@@ -39,8 +45,8 @@ function render(todolist) {
     });
 }
 
-
 window.addEventListener("DOMContentLoaded", render.bind(this, todos));
+
 const view = ` 
 <img src="${img1}" id="background-left" alt="background" />
 <img src="${img2}" id="background-right" alt="background" />
@@ -49,7 +55,7 @@ const view = `
     <div class="todolist">
         <h1>STUDENT TO DO LIST</h1>
         <form id="todoForm"> 
-            <input type="text" id="todoInput" placeholder="What do you need to do today...." /> 
+            <input type="text" id="todoInput" placeholder="What do you need to do today...." required /> 
             <button type="submit">Add Todo</button>
         </form>
         <div class="list">
